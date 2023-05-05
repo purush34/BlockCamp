@@ -13,7 +13,7 @@ app.get('/callFunction', (req,res) => {
   res.send(create_Event());
 });
 app.get('/dashboard', (req, res) => {
-  res.sendFile(__dirname + '/dashboard.html');
+  res.sendFile(path.join(__dirname,"public"  , 'dashboard.html'));
 });
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
