@@ -1,34 +1,40 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
-
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract Lock {
-    uint public unlockTime;
-    address payable public owner;
+    struct Event {
+       address organizer;
+       string name;
+       uint start_date;
+       uint end_date;
+       string location;
+     }
 
-    event Withdrawal(uint amount, uint when);
+    mapping(uint => Event) public events;
+    uint public nextId;
 
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
-
-        unlockTime = _unlockTime;
-        owner = payable(msg.sender);
+    constructor() {
+        nextId = 0;
     }
 
-    function withdraw() public {
-        // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
+    function createEvent(string memory name, uint start_date, uint end_date, string memory location) external {
+        require(start_date > block.timestamp, "You can only create events for future dates");
 
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
+        events[nextId] = Event(msg.sender, name, start_date, end_date, location);
+        nextId++;
 
-        emit Withdrawal(address(this).balance, block.timestamp);
+        // specify a gas limit higher than the estimated gas limit
+        uint gasLimit = 2000000;
+        bytes memory data = abi.encodeWithSignature("createEvent(string,uint256,uint256,string)", name, start_date, end_date, location);
+        (bool success, ) = msg.sender.call{gas: gasLimit}(data);
+        require(success, "Failed to execute contract");
+    }
 
-        owner.transfer(address(this).balance);
+    function getEvents() external view returns (Event[] memory) {
+        Event[] memory eventList = new Event[](nextId);
+        for (uint i = 0; i < nextId; i++) {
+            eventList[i] = events[i];
+        }
+        return eventList;
     }
 }

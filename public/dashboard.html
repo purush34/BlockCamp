@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8">
+	<title>Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+	<!-- header with logo, user id and logout button -->
+<div class="header">
+	<div class="logo">
+		<h3>My Dashboard</h3>
+	</div>
+	<div class="user-info">
+		<span class="user-id">User ID: 1234500000000000000000000000000000000</span>
+        <a href="#" class="logout">Logout</a>
+	</div>
+</div>
+
+<!-- main container with navbar and content -->
+<div class="container">
+	<!-- side navbar -->
+	<div class="sidenav">
+		<ul>
+			<li><a href="#" class="active">Dashboard</a></li>
+			<li><a href="#">nft_Ticketing</a></li>
+			<li><a href="#">create_Event</a></li>
+			<li><a href="#">expense_Tracking</a></li>
+			<li><a href="#">Profile</a></li>
+		</ul>
+	</div>
+
+	<!-- main content -->
+	<div class="content">
+		<!-- default content -->
+		<div class="default-content">
+			<h3>Welcome to My Dashboard!</h3>
+			<p>Please select an option from the navigation menu on the left.</p>
+		</div>
+
+		<!-- dashboard content -->
+		<div class="dashboard-content hide">
+			<h3>Dashboard</h3>
+			<p>This is your dashboard.</p>
+		</div>
+
+		<!-- profile content -->
+		<div class="nft_ticketing-content hide">
+			<h3>nft_ticketing</h3>
+			<p>Create Nfts for Ticketing</p>
+			<form action="">
+				<label for="nft-image">Upload Image</label>
+				<input type="file" name="nft-image" accept="image/png,image/jpeg" id="nft-image">
+				<br>
+				<button>Create NFT</button>
+				<button>Take random picture from online</button>
+			</form>
+			<h5>NFTs created by me</h5>
+			<section class="scrollable">
+				<img src="http://source.unsplash.com/collection/3178572,357786/500x500" width="100px" alt="" srcset="">
+				<img src="http://source.unsplash.com/collection/3178572,357786/500x500" width="100px" alt="" srcset="">
+				<img src="http://source.unsplash.com/collection/3178572,357786/500x500" width="100px" alt="" srcset="">
+			</section>
+
+		</div>
+
+		<!-- settings content -->
+		<div class="create_event-content hide">
+			<h3>create_event</h3>
+			<p>These are your settings.</p>
+			<form action="">
+				<label for="event-name">Event Name</label>
+				<input type="text" name="event-name" id="event-name">
+				<br>
+				<label for="event-date">Event start Date</label>
+				<input type="date" name="event-date" id="startdate">
+				<label for="event-time">Event end date</label>
+				<input type="date" name="event-time" id="enddate">
+				<br>
+				<label for="event-location">Event Location</label>
+				<input type="text" name="event-location" id="event-location">
+				<br>
+				<button onclick="callFunction(event)">Create Event</button>
+			</form>
+			<h4>Response</h4>
+			<p id="response" style="width: 500px;">
+				
+			</p>
+			<h5>Events created by me</h5>
+			<table>
+				<thead>
+					<tr>
+						<th>Event Name</th>
+						<th>Event Date</th>
+						<th>Event Time</th>
+						<th>Event Location</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Blockcamp</td>
+						<td>2021-10-30</td>
+						<td>10:00</td>
+						<td>Online</td>
+					</tr>
+					<tr>
+						<td>Blockcamp</td>
+						<td>2021-10-30</td>
+						<td>10:00</td>
+						<td>Online</td>
+					</tr>
+					<tr>
+						<td>Blockcamp</td>
+						<td>2021-10-30</td>
+						<td>10:00</td>
+						<td>Online</td>
+					</tr>
+					<tr>
+						<td>Blockcamp</td>
+						<td>2021-10-30</td>
+						<td>10:00</td>
+						<td>Online</td>
+					</tr>
+					<tr>
+						<td>Blockcamp</td>
+						<td>2021-10-30</td>
+						<td>10:00</td>
+						<td>Online</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        
+		<!-- settings content -->
+		<div class="expense_tracking-content hide">
+			<h3>expense_tracking</h3>
+			<p>These are your settings.</p>
+		</div>
+
+		<!-- help content -->
+		<div class="profile-content hide">
+			<h3>Profile</h3>
+			<p>This is the help section.</p>
+		</div>
+	</div>
+</div>
+
+<!-- JavaScript code -->
+<script>
+    const userId = document.querySelector('.user-id');
+    userId.textContent = `User ID: ${sessionStorage.getItem('userId')}`;
+	const navLinks = document.querySelectorAll('.sidenav ul li a');
+	const contentDivs = document.querySelectorAll('.content div');
+
+	navLinks.forEach(link => {
+		link.addEventListener('click', () => {
+			navLinks.forEach(link => link.classList.remove('active'));
+			link.classList.add('active');
+			contentDivs.forEach(div => div.classList.add('hide'));
+			document.querySelector(`.${link.textContent.toLowerCase()}-content`).classList.remove('hide');
+		});
+	});
+
+	document.querySelector('.logout-btn').addEventListener('click', () => {
+		// redirect to logout page
+		window.location.href = '/logout';
+	});
+	var data1 = "";
+function callFunction(event) {
+      // Make an AJAX request to the route you defined in server.js
+	  event.preventDefault();
+      fetch('./callFunction')
+        .then(data => {
+      // Retrieve the DOM element by its ID
+      const responseEl = document.getElementById('response');
+      data1 = data;
+      // Set the inner HTML of the element to the data returned by the server
+      responseEl.innerHTML = (data);
+    });
+}
+	
+
+
+</script>
+<script src="./dashboard.js"></script>
+</body>
+</html>

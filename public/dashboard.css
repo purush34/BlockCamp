@@ -136,3 +136,19 @@ tr:hover {
 .hide {
     display: none;
 }
+
+.scrollable {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  width: 100%; /* Set a height for the scrollable div */
+}
+
+img {
+  /* flex: 0 0 calc(33.33% - 20px); Each card should take up one-third of the width of the container, with 20px of margin between them */
+  margin: 10px;
+  width: 100px; /* Set a fixed height for the cards */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
