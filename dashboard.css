@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80vh;
+    margin: 15px auto;
+    max-width: 1200px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidenav {
+    /* position: fixed; */
+    top: 50px;
+    left: 0;
+    /* margin: 50px; */
+    height: 100%;
+    width: 200px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidenav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidenav li {
+    margin: 10px 0;
+}
+
+.sidenav ul li a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.nav a:hover {
+    background-color: #ddd;
+}
+
+.content {
+    flex: 4;
+    background-color: #fff;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.logo {
+    font-size: 1em;
+    /* padding: 10px; */
+    margin-left: 20px;
+}
+
+.logout {
+    color: #fff;
+    font-size: 1em;
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+    margin-right: 20px;
+}
+
+.logout:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.tabcontent {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.user-info {
+    display: inline-block;
+    font-size: 16px;
+    color: #666;
+    text-align: right;
+}
+
+.user-info .user-id {
+    margin-right: 10px;
+}
+
+.hide {
+    display: none;
+}
